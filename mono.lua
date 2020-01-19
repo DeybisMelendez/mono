@@ -45,18 +45,26 @@ function mono:clear()
 end
 mono:clear()
 
-function mono:square(t,xo,yo,w,h)
+function mono:rectangle(t,xo,yo,w,h)
     if t == "fill" then
         for y=1, h do
             for x=1, w do
-                self.map[y+yo-1][x+xo-1] = 1
+                if self.map[math.floor(y+yo-1)] ~= nil then
+                    if self.map[math.floor(y+yo-1)][math.floor(x+xo-1)] ~= nil then
+                        self.map[y+yo-1][x+xo-1] = 1
+                    end
+                end
             end
         end
     elseif t == "line" then
         for y=yo, h+yo-1 do
             for x=xo, w+xo-1 do
                 if x == xo or x == xo + w-1 or y == yo or y == yo + h-1 then
-                    self.map[y][x] = 1
+                    if self.map[math.floor(y)] ~= nil then
+                        if self.map[math.floor(y)][math.floor(x)] ~= nil then
+                            self.map[math.floor(y)][math.floor(x)] = 1
+                        end
+                    end
                 end
             end
         end
